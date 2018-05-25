@@ -12,7 +12,7 @@ import com.indexer.ottohub.view.GithubUserViewHolder
 
 class GithubUserAdapter : BaseAdapter<GithubUserViewHolder, GithubUser>() {
     override fun onBindViewHolder(holder: GithubUserViewHolder, position: Int) {
-        holder.onBind(mItems[position], position)
+        holder.onBind(mItems[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder {

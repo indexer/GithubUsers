@@ -21,7 +21,8 @@ class RestClient private constructor() {
                 .followSslRedirects(true)
                 .retryOnConnectionFailure(true)
                 .cache(null).apply {
-                    addInterceptor(HttpLoggingInterceptor().setLevel(Level.NONE))
+                    addInterceptor(headersInterceptor())
+                    addInterceptor(HttpLoggingInterceptor().setLevel(Level.BODY))
                     connectTimeout(10, TimeUnit.SECONDS)
                     followRedirects(true)
                     followSslRedirects(true)
@@ -32,6 +33,15 @@ class RestClient private constructor() {
                             .readTimeout(60, TimeUnit.SECONDS)
                 }
         return builder.build()
+    }
+
+    fun headersInterceptor() = Interceptor { chain ->
+        chain.proceed(chain.request().newBuilder()
+                .addHeader("Authorization","token " + "ee9751bf715269ab295c0f6070d24d07c692c129")
+                .addHeader("Accept", "application/json")
+                .addHeader("Accept-Language", "en")
+                .addHeader("Content-Type", "application/json")
+                .build())
     }
 
 

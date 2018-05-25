@@ -3,6 +3,7 @@ package com.suthaw.restaurnat.base
 import android.view.ViewGroup
 
 import android.support.v7.widget.RecyclerView
+import com.indexer.ottohub.model.GithubUser
 import java.util.ArrayList
 
 abstract class BaseAdapter<VH : BaseViewHolder, T> : RecyclerView.Adapter<VH> {
