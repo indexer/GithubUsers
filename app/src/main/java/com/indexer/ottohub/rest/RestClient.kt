@@ -23,7 +23,7 @@ class RestClient private constructor() {
                 .retryOnConnectionFailure(true)
                 .cache(null).apply {
                     addInterceptor(headersInterceptor())
-                    addInterceptor(HttpLoggingInterceptor().setLevel(Level.NONE))
+                    addInterceptor(HttpLoggingInterceptor().setLevel(Level.BODY))
                     connectTimeout(10, TimeUnit.SECONDS)
                     followRedirects(true)
                     followSslRedirects(true)
@@ -38,7 +38,7 @@ class RestClient private constructor() {
 
     private fun headersInterceptor() = Interceptor { chain ->
         chain.proceed(chain.request().newBuilder()
-                .addHeader("Authorization", "token " + "ee9751bf715269ab295c0f6070d24d07c692c129")
+                .addHeader("Authorization", "token " + "39f77c90c7f5e7e490c48f613cc8c31085517a31")
                 .addHeader("Accept", "application/json")
                 .addHeader("Accept-Language", "en")
                 .addHeader("Content-Type", "application/json")

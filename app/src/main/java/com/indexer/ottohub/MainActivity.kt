@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.indexer.ottohub.adapter.GithubUserAdapter
 import com.indexer.ottohub.viewmodel.GithubListViewModel
 import com.indexer.ottohub.adapter.SpacesItemDecoration
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity(), BaseViewHolder.OnItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        setSupportActionBar(toolbar_main)
+        supportActionBar?.setDisplayShowTitleEnabled(true)
         githubUserAdapter = GithubUserAdapter(this)
         linearLayoutManager = LinearLayoutManager(this)
         setUpRecyclerView()
@@ -82,6 +84,8 @@ class MainActivity : AppCompatActivity(), BaseViewHolder.OnItemClickListener {
 
     private fun setUpObserveForList(lastInt: Int?) {
         githubListViewModel.getGithubUser(lastInt)?.observe(this@MainActivity, Observer {
+            loading.visibility = View.GONE
+            github_list.visibility = View.VISIBLE
             githubUserAdapter.addItems(items = it!!)
             githubUserAdapter.notifyDataSetChanged()
         })

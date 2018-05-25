@@ -20,6 +20,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:fontFamily="sans-serif"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:drawableStart="@drawable/account"
@@ -29,6 +30,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:fontFamily="sans-serif"
                 android:drawablePadding="8dp"
                 android:gravity="center_vertical"
                 android:drawableStart="@drawable/location"
@@ -38,6 +40,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:fontFamily="sans-serif"
                 android:drawablePadding="8dp"
                 android:autoLink="all"
                 android:focusableInTouchMode="true"
@@ -58,7 +61,7 @@
         android:fitsSystemWindows="true"
         android:background="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="300dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -85,6 +88,7 @@
                     android:contentDescription="@string/app_name" />
 
                 <TextView
+                    android:fontFamily="sans-serif"
                     android:id="@+id/user_title_name"
                     android:padding="8dp"
                     android:layout_below="@+id/avatar_image"
@@ -96,6 +100,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:fontFamily="sans-serif"
                     android:padding="8dp"
                     android:id="@+id/user_bio"
                     android:layout_below="@+id/user_title_name"
