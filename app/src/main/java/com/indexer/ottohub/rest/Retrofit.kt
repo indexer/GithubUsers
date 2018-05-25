@@ -1,4 +1,4 @@
-package com.suthaw.restaurnat.rest
+package com.indexer.ottohub.rest
 
 import retrofit2.Call
 import retrofit2.Callback

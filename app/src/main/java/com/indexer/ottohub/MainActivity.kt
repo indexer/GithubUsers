@@ -9,9 +9,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.indexer.ottohub.adapter.GithubUserAdapter
 import com.indexer.ottohub.viewmodel.GithubListViewModel
-import com.suthaw.restaurnat.adapter.SpacesItemDecoration
-import com.suthaw.restaurnat.base.BaseViewHolder
-import com.suthaw.restaurnat.rest.Config
+import com.indexer.ottohub.adapter.SpacesItemDecoration
+import com.indexer.ottohub.base.BaseViewHolder
+import com.indexer.ottohub.rest.Config
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), BaseViewHolder.OnItemClickListener {
         setUpObserveForList(0)
     }
 
-    private fun setObserverForLastId(id: Int) {
+    private fun setObserverForLastId(id: Int?) {
         githubListViewModel.getLastIdOrNot(github_list.canScrollVertically(1))
                 ?.observe(this@MainActivity, Observer {
                     if(it==false) {
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), BaseViewHolder.OnItemClickListener {
     }
 
 
-    private fun setUpObserveForList(lastInt: Int) {
+    private fun setUpObserveForList(lastInt: Int?) {
         githubListViewModel.getGithubUser(lastInt)?.observe(this@MainActivity, Observer {
             githubUserAdapter.addItems(items = it!!)
             githubUserAdapter.notifyDataSetChanged()

@@ -13,8 +13,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.indexer.ottohub.model.GithubUser
 import com.indexer.ottohub.view.sp2px
 import com.indexer.ottohub.viewmodel.GithubDetailViewModel
-import com.suthaw.restaurnat.rest.Config
+import com.indexer.ottohub.rest.Config
 import kotlinx.android.synthetic.main.activity_detail.*
+import android.view.MenuItem
+import android.view.View
 
 
 class DetailActivity : AppCompatActivity() {
@@ -37,6 +39,7 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+
     private fun setUpandUiUpdate(username:String){
         githubDetailViewModel = ViewModelProviders.of(this).get(GithubDetailViewModel::class.java)
         githubDetailViewModel.getGithubUser(username)?.observe(this, Observer {
@@ -44,8 +47,20 @@ class DetailActivity : AppCompatActivity() {
         })
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+
+        if (id == android.R.id.home) {
+            onBackPressed()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun setUpDetailView(githubUser: GithubUser?) {
+        info.visibility = View.VISIBLE
         Glide.with(this).load(githubUser?.avatar_url)
                 .apply(RequestOptions.circleCropTransform()).into(avatar_image)
         if (githubUser?.site_admin!!) {

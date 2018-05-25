@@ -1,14 +1,14 @@
 package com.indexer.ottohub.adapter
 
 import android.view.ViewGroup
-import com.suthaw.restaurnat.base.BaseAdapter
+import com.indexer.ottohub.base.BaseAdapter
 
 
 import android.view.LayoutInflater
 import com.indexer.ottohub.R
 import com.indexer.ottohub.model.GithubUser
 import com.indexer.ottohub.view.GithubUserViewHolder
-import com.suthaw.restaurnat.base.BaseViewHolder
+import com.indexer.ottohub.base.BaseViewHolder
 
 
 class GithubUserAdapter (var onItemClickListener: BaseViewHolder.OnItemClickListener):

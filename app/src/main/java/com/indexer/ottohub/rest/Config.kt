@@ -1,4 +1,4 @@
-package com.suthaw.restaurnat.rest
+package com.indexer.ottohub.rest
 
 class Config {
     companion object {

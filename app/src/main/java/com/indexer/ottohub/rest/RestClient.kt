@@ -1,5 +1,6 @@
-package com.suthaw.restaurnat.rest
+package com.indexer.ottohub.rest
 
+import com.suthaw.restaurnat.rest.ApiService
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.*
@@ -22,7 +23,7 @@ class RestClient private constructor() {
                 .retryOnConnectionFailure(true)
                 .cache(null).apply {
                     addInterceptor(headersInterceptor())
-                    addInterceptor(HttpLoggingInterceptor().setLevel(Level.BODY))
+                    addInterceptor(HttpLoggingInterceptor().setLevel(Level.NONE))
                     connectTimeout(10, TimeUnit.SECONDS)
                     followRedirects(true)
                     followSslRedirects(true)
@@ -35,9 +36,9 @@ class RestClient private constructor() {
         return builder.build()
     }
 
-    fun headersInterceptor() = Interceptor { chain ->
+    private fun headersInterceptor() = Interceptor { chain ->
         chain.proceed(chain.request().newBuilder()
-                .addHeader("Authorization","token " + "ee9751bf715269ab295c0f6070d24d07c692c129")
+                .addHeader("Authorization", "token " + "ee9751bf715269ab295c0f6070d24d07c692c129")
                 .addHeader("Accept", "application/json")
                 .addHeader("Accept-Language", "en")
                 .addHeader("Content-Type", "application/json")

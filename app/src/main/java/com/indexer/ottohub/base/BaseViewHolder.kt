@@ -1,4 +1,4 @@
-package com.suthaw.restaurnat.base
+package com.indexer.ottohub.base
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

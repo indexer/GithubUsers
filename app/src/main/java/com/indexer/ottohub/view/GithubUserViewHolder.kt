@@ -7,7 +7,7 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.indexer.ottohub.model.GithubUser
-import com.suthaw.restaurnat.base.BaseViewHolder
+import com.indexer.ottohub.base.BaseViewHolder
 import kotlinx.android.synthetic.main.user_item.view.*
 import cn.nekocode.badge.BadgeDrawable
 

@@ -2,10 +2,9 @@ package com.indexer.ottohub.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
 import com.indexer.ottohub.model.GithubUser
-import com.suthaw.restaurnat.rest.RestClient
-import com.suthaw.restaurnat.rest.enqueue
+import com.indexer.ottohub.rest.RestClient
+import com.indexer.ottohub.rest.enqueue
 import android.arch.lifecycle.MutableLiveData
 
 

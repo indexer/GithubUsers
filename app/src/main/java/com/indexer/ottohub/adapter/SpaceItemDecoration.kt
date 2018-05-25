@@ -1,4 +1,4 @@
-package com.suthaw.restaurnat.adapter
+package com.indexer.ottohub.adapter
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
