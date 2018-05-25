@@ -12,8 +12,7 @@ class RestClient private constructor() {
     private val mService: ApiService
 
     init {
-        val restAdapter = Retrofit.Builder().baseUrl(Config.base).
-                addConverterFactory(GsonConverterFactory.create()).client(getNewHttpClient()).build()
+        val restAdapter = Retrofit.Builder().baseUrl(Config.base).addConverterFactory(GsonConverterFactory.create()).client(getNewHttpClient()).build()
         mService = restAdapter.create(ApiService::class.java)
     }
 

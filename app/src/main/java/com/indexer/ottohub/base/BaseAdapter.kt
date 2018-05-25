@@ -7,12 +7,12 @@ import java.util.ArrayList
 
 abstract class BaseAdapter<VH : BaseViewHolder, T> : RecyclerView.Adapter<VH> {
 
-    protected var mItems: MutableList<T>
+    var mItems: MutableList<T>
 
     /**
      * @param items new array list for adapter
      */
-    var items: List<T>
+    var items: List<T>?
         get() = mItems
         set(items) {
             this.mItems = items as MutableList<T>
