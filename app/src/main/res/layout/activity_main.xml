@@ -5,15 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_margin="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:padding="8dp"
+            android:id="@+id/user_title"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Users"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/user_title"
         android:id="@+id/github_list"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+         />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
+
 
 </android.support.constraint.ConstraintLayout>

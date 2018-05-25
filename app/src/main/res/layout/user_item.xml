@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="?android:attr/selectableItemBackground"
     android:layout_height="wrap_content">
 
     <ImageView
+        android:layout_margin="8dp"
+        android:layout_centerVertical="true"
         android:scaleType="centerCrop"
         android:id="@+id/user_image"
         android:layout_width="60dp"
         android:layout_height="60dp" />
 
     <TextView
+        android:layout_margin="8dp"
         android:id="@+id/user_name"
         android:layout_toRightOf="@id/user_image"
         android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:padding="8dp"
-        android:layout_toEndOf="@+id/user_image"
-        android:id="@+id/user_description"
-        android:layout_below="@id/user_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </RelativeLayout>
