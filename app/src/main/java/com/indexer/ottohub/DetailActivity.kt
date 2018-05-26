@@ -51,8 +51,7 @@ class DetailActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRec
     private fun showMessage(isConnected: Boolean) {
         if (!isConnected) {
             val messageToUser = "You are offline now."
-            loading.visibility = View.GONE
-            mSnackBar = Snackbar.make(findViewById(R.id.relativeLayout), messageToUser, Snackbar.LENGTH_LONG)
+            mSnackBar = Snackbar.make(findViewById(R.id.action_bar_root), messageToUser, Snackbar.LENGTH_LONG)
             mSnackBar?.duration = Snackbar.LENGTH_INDEFINITE
             mSnackBar?.show()
         } else {
@@ -60,6 +59,12 @@ class DetailActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRec
             mSnackBar?.dismiss()
         }
 
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConnectivityReceiver.connectivityReceiverListener = this
 
     }
 
