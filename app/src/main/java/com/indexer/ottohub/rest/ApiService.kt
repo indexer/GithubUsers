@@ -13,6 +13,6 @@ interface ApiService {
                        @Query("pagesize") pagesize:Int): Call<List<GithubUser>>
 
     @GET(Config.user_by_name)fun getSingleGithubUser
-            (@Path("user_name") username :String): Call<GithubUser>
+            (@Path("user_name") username :String?): Call<GithubUser>
 
 }

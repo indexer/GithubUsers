@@ -3,6 +3,7 @@ package com.indexer.ottohub
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.SpannableString
 import android.text.TextUtils
@@ -17,11 +18,19 @@ import com.indexer.ottohub.rest.Config
 import kotlinx.android.synthetic.main.activity_detail.*
 import android.view.MenuItem
 import android.view.View
+import com.indexer.ottohub.listener.ConnectivityReceiver
+import kotlinx.android.synthetic.main.activity_main.*
 
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
+    override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        showMessage(isConnected)
+    }
 
     private lateinit var githubDetailViewModel: GithubDetailViewModel
+    private var username: String? = null
+    private var mSnackBar: Snackbar? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,15 +41,30 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val username = intent.getStringExtra(Config.user_name)
+        username = intent.getStringExtra(Config.user_name)
         user_website.movementMethod = LinkMovementMethod.getInstance()
         setUpandUiUpdate(username)
 
 
     }
 
+    private fun showMessage(isConnected: Boolean) {
+        if (!isConnected) {
+            val messageToUser = "You are offline now."
+            loading.visibility = View.GONE
+            mSnackBar = Snackbar.make(findViewById(R.id.relativeLayout), messageToUser, Snackbar.LENGTH_LONG)
+            mSnackBar?.duration = Snackbar.LENGTH_INDEFINITE
+            mSnackBar?.show()
+        } else {
+            setUpandUiUpdate(username)
+            mSnackBar?.dismiss()
+        }
 
-    private fun setUpandUiUpdate(username:String){
+
+    }
+
+
+    private fun setUpandUiUpdate(username: String?) {
         githubDetailViewModel = ViewModelProviders.of(this).get(GithubDetailViewModel::class.java)
         githubDetailViewModel.getGithubUser(username)?.observe(this, Observer {
             setUpDetailView(it)
@@ -49,12 +73,10 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-
         if (id == android.R.id.home) {
             onBackPressed()
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
 

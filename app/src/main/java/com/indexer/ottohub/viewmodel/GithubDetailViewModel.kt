@@ -13,13 +13,13 @@ class GithubDetailViewModel(application: Application) : AndroidViewModel(applica
     private var githubUser: MutableLiveData<GithubUser>? = null
 
 
-    fun getGithubUser(username: String) : MutableLiveData<GithubUser>? {
+    fun getGithubUser(username: String?) : MutableLiveData<GithubUser>? {
         githubUser = MutableLiveData()
         loadItem(username)
         return githubUser
     }
 
-    private fun loadItem(username: String) {
+    private fun loadItem(username: String?) {
         val singleUser = RestClient.getService().getSingleGithubUser(username)
         singleUser.enqueue(success = {
            githubUser?.postValue(it.body())

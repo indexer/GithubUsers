@@ -3,7 +3,10 @@ package com.indexer.ottohub
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -12,14 +15,16 @@ import com.indexer.ottohub.adapter.GithubUserAdapter
 import com.indexer.ottohub.viewmodel.GithubListViewModel
 import com.indexer.ottohub.adapter.SpacesItemDecoration
 import com.indexer.ottohub.base.BaseViewHolder
+import com.indexer.ottohub.listener.ConnectivityReceiver
 import com.indexer.ottohub.rest.Config
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), BaseViewHolder.OnItemClickListener {
+class MainActivity : AppCompatActivity(), BaseViewHolder.OnItemClickListener,ConnectivityReceiver.ConnectivityReceiverListener {
     lateinit var githubUserAdapter: GithubUserAdapter
     private lateinit var githubListViewModel: GithubListViewModel
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private var mSnackBar: Snackbar? = null
 
 
     override fun onItemClick(position: Int) {
@@ -37,9 +42,32 @@ class MainActivity : AppCompatActivity(), BaseViewHolder.OnItemClickListener {
         supportActionBar?.setDisplayShowTitleEnabled(true)
         githubUserAdapter = GithubUserAdapter(this)
         linearLayoutManager = LinearLayoutManager(this)
-        setUpRecyclerView()
-        setUpGithubViewModel()
-        setUpRecyclerViewListener()
+        registerReceiver(ConnectivityReceiver(),
+                IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConnectivityReceiver.connectivityReceiverListener = this
+
+    }
+
+
+    private fun showMessage(isConnected: Boolean) {
+        if (!isConnected) {
+            val messageToUser = "You are offline now."
+            loading.visibility = View.GONE
+            mSnackBar = Snackbar.make(findViewById(R.id.relativeLayout), messageToUser, Snackbar.LENGTH_LONG)
+            mSnackBar?.duration = Snackbar.LENGTH_INDEFINITE
+            mSnackBar?.show()
+        } else {
+            setUpRecyclerView()
+            setUpGithubViewModel()
+            setUpRecyclerViewListener()
+            mSnackBar?.dismiss()
+        }
+
 
     }
 
@@ -89,6 +117,10 @@ class MainActivity : AppCompatActivity(), BaseViewHolder.OnItemClickListener {
             githubUserAdapter.addItems(items = it!!)
             githubUserAdapter.notifyDataSetChanged()
         })
+    }
+
+    override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        showMessage(isConnected)
     }
 
 
